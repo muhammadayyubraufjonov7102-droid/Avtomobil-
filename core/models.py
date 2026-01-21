@@ -1,19 +1,17 @@
 from django.db import models
-from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField 
 
-class User(models.Model):
-    name = models.CharField(max_length=100)
+class User(AbstractUser):
     phone_number = PhoneNumberField(unique=True)
 
-now = timezone.now()
 class Car(models.Model):
     name = models.CharField(max_length=100)
     brand = models.CharField(max_length=100)
-    year = models.DateField(default=now)
+    year = models.IntegerField()
     mileage = models.PositiveIntegerField(default=0)
-    engine_power = models.IntegerField()
-    price = models.IntegerField()
+    engine_power = models.PositiveIntegerField()
+    price = models.PositiveIntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     
